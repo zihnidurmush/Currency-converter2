@@ -35,7 +35,6 @@ function loadFlag(element) {
     }
 }
 
-// Input event listener to handle decimal input correctly
 amountInput.addEventListener('input', () => {
     let value = amountInput.value;
 
@@ -44,10 +43,6 @@ amountInput.addEventListener('input', () => {
     let decimalParts = value.split('.');
     if (decimalParts.length > 2) {
         value = decimalParts[0] + '.' + decimalParts.slice(1).join('');
-    }
-
-    if (value.startsWith('0') && value.length > 1 && !value.includes('.')) {
-        value = value.replace(/^0+/, '');
     }
 
     amountInput.value = value;
@@ -76,7 +71,6 @@ function getExchangeRate() {
 
     if (isNaN(amountValue) || amountValue < 0) {
         amountValue = 0;
-        amountInput.value = amountValue.toString();
     }
 
     let url = `https://v6.exchangerate-api.com/v6/edc87be85f1233921a235184/latest/${fromCurrency.value}`;
