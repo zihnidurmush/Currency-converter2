@@ -39,6 +39,12 @@ amountInput.addEventListener('input', () => {
     getExchangeRate();
 });
 
+amountInput.addEventListener('focus', () => {
+    setTimeout(() => {
+        amountInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 300); 
+});
+
 window.addEventListener('load', () => {
     getExchangeRate();
 });
@@ -75,8 +81,4 @@ function getExchangeRate() {
     })
 }
 
-amountInput.addEventListener('focus', () => {
-    setTimeout(() => {
-        amountInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }, 300); 
-});
+
