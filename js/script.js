@@ -74,3 +74,9 @@ function getExchangeRate() {
         exchangeRateTxt.innerText = 'Something went wrong';
     })
 }
+
+amountInput.addEventListener('focus', () => {
+    setTimeout(() => {
+        amountInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 300); 
+});
