@@ -39,16 +39,6 @@ amountInput.addEventListener('input', () => {
     getExchangeRate();
 });
 
-const observer = new ResizeObserver(entries => {
-    for (let entry of entries) {
-        if (entry.contentRect.height < window.innerHeight) {
-            amountInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-    }
-});
-
-observer.observe(document.body);
-
 window.addEventListener('load', () => {
     getExchangeRate();
 });
