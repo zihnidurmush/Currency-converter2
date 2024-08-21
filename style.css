@@ -28,7 +28,7 @@ body{
 }
 
 .wrapper form {
-    margin: 40px 0 20px 0;
+    margin: 20px 0 20px 0;
 }
 
 form :where(input, select, button) {
@@ -109,10 +109,10 @@ form .exchange-rate {
     margin: 20px 0 30px;
 }
 
-form button {
+/* form button {
     height: 52px;
     color: #fff;
     font-size: 17px;
     cursor: pointer;
     background: #675AFE;
-}
+} */
