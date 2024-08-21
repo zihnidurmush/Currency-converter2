@@ -69,8 +69,9 @@ exchangeIcon.addEventListener('click', () => {
 function getExchangeRate() {
     let amountValue = parseFloat(amountInput.value.trim());
 
-    if (isNaN(amountValue) || amountValue < 0) {
+    if (isNaN(amountValue) || amountValue <= 0) {
         amountValue = 0;
+        amountInput.value = 0;
     }
 
     let url = `https://v6.exchangerate-api.com/v6/edc87be85f1233921a235184/latest/${fromCurrency.value}`;
