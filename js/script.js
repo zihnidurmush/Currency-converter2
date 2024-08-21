@@ -9,9 +9,9 @@ for (let i = 0; i < dropList.length; i++) {
     for (let currency_code in country_code) {
         let selected;
         if (i === 0) {
-            selected = currency_code === 'TRY' ? 'selected' : '';
-        } else if (i === 1) {
-            selected = currency_code === 'BGN' ? 'selected' : '';
+            selected = currency_code == 'TRY' ? 'selected' : '';
+        } else if (i == 1) {
+            selected = currency_code == 'BGN' ? 'selected' : '';
         }
         
         let optionTagForCurrency = `<option value="${currency_code}" ${selected}>${currency_code}</option>`;
@@ -25,11 +25,11 @@ for (let i = 0; i < dropList.length; i++) {
 }
 
 function loadFlag(element) {
-    for (let code in country_code) {
+    for(let code in country_code) {
         if (code === element.value) {
             let imgTag = element.parentElement.querySelector('img');
             if (imgTag) {
-                imgTag.src = `https://flagsapi.com/${country_code[code]}/shiny/64.png`;
+            imgTag.src = `https://flagsapi.com/${country_code[code]}/shiny/64.png`;
             }
         }
     }
@@ -51,27 +51,7 @@ exchangeIcon.addEventListener('click', () => {
     loadFlag(fromCurrency);
     loadFlag(toCurrency);
     getExchangeRate();
-});
-
-function scrollToVisible() {
-    const amountInputRect = amountInput.getBoundingClientRect();
-    const resultRect = exchangeRateTxt.getBoundingClientRect();
-    const viewportHeight = window.innerHeight;
-
-    const scrollY = window.scrollY + Math.min(
-        Math.max(0, amountInputRect.top + window.scrollY - viewportHeight / 2),
-        resultRect.bottom + window.scrollY - viewportHeight + 50
-    );
-
-    window.scrollTo({
-        top: scrollY,
-        behavior: 'smooth'
-    });
-}
-
-amountInput.addEventListener('focus', () => {
-    setTimeout(scrollToVisible, 100); // Use a timeout to ensure the focus event is processed first
-});
+})
 
 function getExchangeRate() {
     let amountValue = amountInput.value;
@@ -94,3 +74,5 @@ function getExchangeRate() {
         exchangeRateTxt.innerText = 'Something went wrong';
     })
 }
+
+
