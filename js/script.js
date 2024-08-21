@@ -37,24 +37,14 @@ function loadFlag(element) {
 
 amountInput.addEventListener('input', () => {
     let value = amountInput.value;
+    
+    value = value.replace(/,/g, '.');
 
-    // Remove any non-numeric characters except the decimal point
     value = value.replace(/[^0-9.]/g, '');
 
-    // Ensure there's only one decimal point
     let decimalParts = value.split('.');
     if (decimalParts.length > 2) {
         value = decimalParts[0] + '.' + decimalParts.slice(1).join('');
-    }
-
-    // Handle leading zeros: Allow '0.' but remove unnecessary zeros
-    if (value.startsWith('0') && !value.startsWith('0.') && value.length > 1) {
-        value = value.replace(/^0+/, '');
-    }
-
-    // Handle special case where value is just '0'
-    if (value === '0.') {
-        value = '0.';
     }
 
     amountInput.value = value;
@@ -81,7 +71,7 @@ exchangeIcon.addEventListener('click', () => {
 });
 
 function getExchangeRate() {
-    let amountValue = amountInput.value;
+    let amountValue = parseFloat(amountInput.value);
 
     if (isNaN(amountValue) || amountValue <= 0) {
         amountValue = 0;
