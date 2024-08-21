@@ -47,6 +47,10 @@ amountInput.addEventListener('input', () => {
         value = decimalParts[0] + '.' + decimalParts.slice(1).join('');
     }
 
+    if (value.startsWith('0') && value.length > 1 && !value.startsWith('0.')) {
+        value = value.replace(/^0+/, '');
+    }
+
     amountInput.value = value;
 
     if (value === '' || isNaN(parseFloat(value))) {
@@ -55,6 +59,28 @@ amountInput.addEventListener('input', () => {
         getExchangeRate();
     }
 });
+
+function getExchangeRate() {
+    let amountValue = parseFloat(amountInput.value);
+
+    if (isNaN(amountValue) || amountValue <= 0) {
+        amountValue = 0;
+        amountInput.value = 0;
+    }
+
+    let url = `https://v6.exchangerate-api.com/v6/01dd23e50f983352e09328d1/latest/${fromCurrency.value}`;
+
+    fetch(url)
+    .then(response => response.json())
+    .then(result => {
+        let exchangeRate = result.conversion_rates[toCurrency.value];
+        let totalExchangeRate = (amountValue * exchangeRate).toFixed(2);
+        exchangeRateTxt.innerText = `${amountValue} ${fromCurrency.value} = ${totalExchangeRate} ${toCurrency.value}`;
+    })
+    .catch(() => {
+        exchangeRateTxt.innerText = 'Something went wrong';
+    });
+}
 
 window.addEventListener('load', () => {
     getExchangeRate();
@@ -69,25 +95,3 @@ exchangeIcon.addEventListener('click', () => {
     loadFlag(toCurrency);
     getExchangeRate();
 });
-
-function getExchangeRate() {
-    let amountValue = parseFloat(amountInput.value);
-
-    if (isNaN(amountValue) || amountValue <= 0) {
-        amountValue = 0;
-        amountInput.value = 0;
-    }
-
-    let url = `https://v6.exchangerate-api.com/v6/edc87be85f1233921a235184/latest/${fromCurrency.value}`;
-
-    fetch(url)
-    .then(response => response.json())
-    .then(result => {
-        let exchangeRate = result.conversion_rates[toCurrency.value];
-        let totalExchangeRate = (amountValue * exchangeRate).toFixed(2);
-        exchangeRateTxt.innerText = `${amountValue} ${fromCurrency.value} = ${totalExchangeRate} ${toCurrency.value}`;
-    })
-    .catch(() => {
-        exchangeRateTxt.innerText = 'Something went wrong';
-    });
-}
