@@ -42,7 +42,7 @@ amountInput.addEventListener('input', () => {
 
     let decimalParts = value.split('.');
     if (decimalParts.length > 2) {
-        value = decimalParts[0] + '.' + decimalParts.slice(1).join('');
+        value = decimalParts[0] + ',' + decimalParts.slice(1).join('');
     }
 
     amountInput.value = value;
