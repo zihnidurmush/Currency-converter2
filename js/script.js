@@ -38,16 +38,30 @@ function loadFlag(element) {
 amountInput.addEventListener('input', () => {
     let value = amountInput.value;
 
+    // Remove any non-numeric characters except the decimal point
     value = value.replace(/[^0-9.]/g, '');
 
-    let decimalParts = value.split(',');
+    // Ensure there's only one decimal point
+    let decimalParts = value.split('.');
     if (decimalParts.length > 2) {
-        value = decimalParts[0] + ',' + decimalParts.slice(1).join('');
+        value = decimalParts[0] + '.' + decimalParts.slice(1).join('');
+    }
+
+    // Handle leading zeros: Allow '0.' but remove unnecessary zeros
+    if (value.startsWith('0') && !value.startsWith('0.') && value.length > 1) {
+        value = value.replace(/^0+/, '');
+    }
+
+    // Handle special case where value is just '0'
+    if (value === '0.') {
+        value = '0.';
     }
 
     amountInput.value = value;
 
-    if (value !== '' && !isNaN(parseFloat(value))) {
+    if (value === '' || isNaN(parseFloat(value))) {
+        exchangeRateTxt.innerText = `0 ${fromCurrency.value} = 0.00 ${toCurrency.value}`;
+    } else {
         getExchangeRate();
     }
 });
@@ -67,7 +81,7 @@ exchangeIcon.addEventListener('click', () => {
 });
 
 function getExchangeRate() {
-    let amountValue = parseFloat(amountInput.value.trim());
+    let amountValue = amountInput.value;
 
     if (isNaN(amountValue) || amountValue <= 0) {
         amountValue = 0;
