@@ -15,7 +15,6 @@ for (let i = 0; i < dropList.length; i++) {
         }
         
         let optionTagForCurrency = `<option value="${currency_code}" ${selected}>${currency_code}</option>`;
-        
         dropList[i].insertAdjacentHTML('beforeend', optionTagForCurrency);
     }
     dropList[i].addEventListener('change', e => {
@@ -36,18 +35,20 @@ function loadFlag(element) {
 }
 
 amountInput.addEventListener('input', () => {
-    let value = amountInput.value.replace(/[^0-9.]/g, '');
+    let value = amountInput.value;
+
+    value = value.replace(/[^0-9.]/g, '');
 
     let decimalParts = value.split('.');
     if (decimalParts.length > 2) {
         value = decimalParts[0] + '.' + decimalParts.slice(1).join('');
     }
 
-    if (value === '' || parseFloat(value) < 0) {
-        value = '';
-    }
     amountInput.value = value;
-    getExchangeRate();
+
+    if (value !== '' && !isNaN(parseFloat(value))) {
+        getExchangeRate();
+    }
 });
 
 window.addEventListener('load', () => {
@@ -68,20 +69,20 @@ function getExchangeRate() {
     let amountValue = parseFloat(amountInput.value.trim());
 
     if (isNaN(amountValue) || amountValue < 0) {
-        amountValue = '';
+        amountValue = 0;
         amountInput.value = amountValue.toString();
     }
 
     let url = `https://v6.exchangerate-api.com/v6/edc87be85f1233921a235184/latest/${fromCurrency.value}`;
 
     fetch(url)
-    .then(response => response.json())
-    .then(result => {
-        let exchangeRate = result.conversion_rates[toCurrency.value];
-        let totalExchangeRate = (amountValue * exchangeRate).toFixed(2);
-        exchangeRateTxt.innerText = `${amountValue} ${fromCurrency.value} = ${totalExchangeRate} ${toCurrency.value}`;
-    })
-    .catch(() => {
-        exchangeRateTxt.innerText = 'Something went wrong';
-    });
+        .then(response => response.json())
+        .then(result => {
+            let exchangeRate = result.conversion_rates[toCurrency.value];
+            let totalExchangeRate = (amountValue * exchangeRate).toFixed(2);
+            exchangeRateTxt.innerText = `${amountValue} ${fromCurrency.value} = ${totalExchangeRate} ${toCurrency.value}`;
+        })
+        .catch(() => {
+            exchangeRateTxt.innerText = 'Something went wrong';
+        });
 }
