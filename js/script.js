@@ -36,12 +36,17 @@ function loadFlag(element) {
 }
 
 amountInput.addEventListener('input', () => {
-    let value = parseFloat(amountInput.value.trim());
+    let value = amountInput.value.replace(/[^0-9.]/g, '');
 
-    if (isNaN(value) || value < 0) {
-        value = '0'; 
+    let decimalParts = value.split('.');
+    if (decimalParts.length > 2) {
+        value = decimalParts[0] + '.' + decimalParts.slice(1).join('');
     }
-    amountInput.value = value.toString();
+
+    if (value === '' || parseFloat(value) < 0) {
+        value = '';
+    }
+    amountInput.value = value;
     getExchangeRate();
 });
 
@@ -63,7 +68,7 @@ function getExchangeRate() {
     let amountValue = parseFloat(amountInput.value.trim());
 
     if (isNaN(amountValue) || amountValue < 0) {
-        amountValue = 0; 
+        amountValue = '';
         amountInput.value = amountValue.toString();
     }
 
