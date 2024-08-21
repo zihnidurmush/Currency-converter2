@@ -38,22 +38,17 @@ function loadFlag(element) {
 amountInput.addEventListener('input', () => {
     let value = amountInput.value;
     
-    // Convert commas to periods
     value = value.replace(/,/g, '.');
 
-    // Remove any invalid characters (anything that's not a number or decimal point)
     value = value.replace(/[^0-9.]/g, '');
 
-    // Handle the case where the user types multiple decimal points
     let decimalParts = value.split('.');
     if (decimalParts.length > 2) {
         value = decimalParts[0] + '.' + decimalParts.slice(1).join('');
     }
 
-    // Update the input field with the valid value
     amountInput.value = value;
 
-    // Check if the value is empty or not a valid number
     if (value === '' || isNaN(parseFloat(value))) {
         exchangeRateTxt.innerText = `0 ${fromCurrency.value} = 0.00 ${toCurrency.value}`;
     } else {
@@ -83,7 +78,7 @@ function getExchangeRate() {
         amountInput.value = 0;
     }
 
-    let url = `https://v6.exchangerate-api.com/v6/01dd23e50f983352e09328d1/latest/${fromCurrency.value}`;
+    let url = `https://v6.exchangerate-api.com/v6/edc87be85f1233921a235184/latest/${fromCurrency.value}`;
 
     fetch(url)
     .then(response => response.json())
