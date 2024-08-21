@@ -81,7 +81,7 @@ exchangeIcon.addEventListener('click', () => {
 });
 
 function getExchangeRate() {
-    let amountValue = amountInput.value;
+    let amountValue = parseFloat(amountInput.value);
 
     if (isNaN(amountValue) || amountValue <= 0) {
         amountValue = 0;
