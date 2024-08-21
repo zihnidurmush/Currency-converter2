@@ -1,13 +1,14 @@
 const dropList = document.querySelectorAll('.drop-list select');
-fromCurrency = document.querySelector('.from select');
-toCurrency = document.querySelector('.to select');
+const fromCurrency = document.querySelector('.from select');
+const toCurrency = document.querySelector('.to select');
 
-let getButton = document.querySelector('form  button');
+const amountInput = document.querySelector('.amount input');
+const exchangeRateTxt = document.querySelector('.exchange-rate');
 
 for (let i = 0; i < dropList.length; i++) {
-    for (currency_code in country_code) {
+    for (let currency_code in country_code) {
         let selected;
-        if (i == 0) {
+        if (i === 0) {
             selected = currency_code == 'TRY' ? 'selected' : '';
         } else if (i == 1) {
             selected = currency_code == 'BGN' ? 'selected' : '';
@@ -19,24 +20,26 @@ for (let i = 0; i < dropList.length; i++) {
     }
     dropList[i].addEventListener('change', e => {
         loadFlag(e.target);
+        getExchangeRate();
     });
 }
 
 function loadFlag(element) {
-    for(code in country_code) {
-        if (code == element.value) {
+    for(let code in country_code) {
+        if (code === element.value) {
             let imgTag = element.parentElement.querySelector('img');
+            if (imgTag) {
             imgTag.src = `https://flagsapi.com/${country_code[code]}/shiny/64.png`;
+            }
         }
     }
 }
 
-window.addEventListener('load', () => {
+amountInput.addEventListener('input', () => {
     getExchangeRate();
 });
 
-getButton.addEventListener('click', e => {
-    e.preventDefault();
+window.addEventListener('load', () => {
     getExchangeRate();
 });
 
@@ -51,20 +54,18 @@ exchangeIcon.addEventListener('click', () => {
 })
 
 function getExchangeRate() {
-    const amount = document.querySelector('.amount input');
-    let exchangeRateTxt = document.querySelector('.exchange-rate');
-    let amountValue = amount.value;
+    let amountValue = amountInput.value;
     
-    if (amountValue == '' || amountValue == '0') {
-        amount.value = '1';
+    if (amountValue === '' || amountValue === '0') {
+        amountInput.value = '1';
         amountValue = 1;
     }
-    
-    exchangeRateTxt.innerText  = 'Getting exchange rate...';
-    
+        
     let url = `https://v6.exchangerate-api.com/v6/edc87be85f1233921a235184/latest/${fromCurrency.value}`;
     
-    fetch(url).then(response => response.json()).then(result => {
+    fetch(url)
+    .then(response => response.json())
+    .then(result => {
         let exchangeRate = result.conversion_rates[toCurrency.value];
         
         let totalExchangeRate = (amountValue * exchangeRate).toFixed(2);
