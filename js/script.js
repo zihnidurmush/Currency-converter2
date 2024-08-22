@@ -65,8 +65,8 @@ function getExchangeRate() {
     let amountValue = parseFloat(amountInput.value);
     
     if (isNaN(amountValue) || amountValue < 0) {
-        amountValue = 0;
-        amountInput.value = 0;
+        amountValue = 1;
+        amountInput.value = 1;
     }
     
     let url = `https://v6.exchangerate-api.com/v6/01dd23e50f983352e09328d1/latest/${fromCurrency.value}`;
