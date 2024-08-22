@@ -1,3 +1,5 @@
+import { API_KEY } from './apiKey.js';
+
 const dropList = document.querySelectorAll('.drop-list select');
 const fromCurrency = document.querySelector('.from select');
 const toCurrency = document.querySelector('.to select');
@@ -69,7 +71,7 @@ function getExchangeRate() {
         amountInput.value = 1;
     }
     
-    let url = `https://v6.exchangerate-api.com/v6/01dd23e50f983352e09328d1/latest/${fromCurrency.value}`;
+    let url = `https://v6.exchangerate-api.com/v6/${API_KEY}/latest/${fromCurrency.value}`;
     
     fetch(url)
     .then(response => response.json())
