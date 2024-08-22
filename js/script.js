@@ -39,20 +39,21 @@ amountInput.addEventListener('input', () => {
     let value = amountInput.value;
     
     value = value.replace(/,/g, '.');
-
+    
     value = value.replace(/[^0-9.]/g, '');
-
+    
     let decimalParts = value.split('.');
+
     if (decimalParts.length > 2) {
         value = decimalParts[0] + '.' + decimalParts.slice(1).join('');
     }
-
+    
     if (value.startsWith('0') && value.length > 1 && !value.startsWith('0.')) {
-        value = value.replace(/^0+/, '');
+        value = value.replace(/^0+/, '');  // Remove leading zeros unless it's '0.'
     }
-
+    
     amountInput.value = value;
-
+    
     if (value === '' || isNaN(parseFloat(value))) {
         exchangeRateTxt.innerText = `0 ${fromCurrency.value} = 0.00 ${toCurrency.value}`;
     } else {
@@ -62,14 +63,14 @@ amountInput.addEventListener('input', () => {
 
 function getExchangeRate() {
     let amountValue = parseFloat(amountInput.value);
-
-    if (isNaN(amountValue) || amountValue <= 0) {
+    
+    if (isNaN(amountValue) || amountValue < 0) {
         amountValue = 0;
         amountInput.value = 0;
     }
-
+    
     let url = `https://v6.exchangerate-api.com/v6/01dd23e50f983352e09328d1/latest/${fromCurrency.value}`;
-
+    
     fetch(url)
     .then(response => response.json())
     .then(result => {
