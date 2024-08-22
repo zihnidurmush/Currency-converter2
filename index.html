@@ -13,11 +13,7 @@
     <div class="wrapper">
         <header>Currency Converter</header>
         <form action="#">
-            <div class="amount">
-                <p>Enter Amount</p>
-                <input type="text" inputmode="decimal">
-        <p id="output"></p>
-            </div>
+            
             <div class="drop-list">
                 <div class="from">
                     <p>From</p>
@@ -26,7 +22,7 @@
                         <select></select>
                     </div>
                 </div>
-
+                
                 <div class="icon"><i class="fas fa-exchange-alt"></i></div>
                 
                 <div class="to">
@@ -37,10 +33,15 @@
                     </div>
                 </div>
             </div>
+            <div class="amount">
+                <p>Enter Amount</p>
+                <input type="text" inputmode="decimal">
+                <p id="output"></p>
+            </div>
             <div class="exchange-rate">Getting exchange rate...</div>
         </form>
     </div>
-
+    
     <script src="js/country-list.js"></script>
     <script src="js/script.js"></script>
 </body>
