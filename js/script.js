@@ -9,7 +9,7 @@ for (let i = 0; i < dropList.length; i++) {
     for (let currency_code in country_code) {
         let selected = '';
         if (i === 0) {
-            selected = currency_code === 'TRY' ? 'selected' : '';
+            selected = currency_code === 'USD' ? 'selected' : '';
         } else if (i === 1) {
             selected = currency_code === 'BGN' ? 'selected' : '';
         }
