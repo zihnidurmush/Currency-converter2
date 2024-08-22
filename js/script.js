@@ -1,4 +1,7 @@
-import { API_KEY } from './apiKey.js';
+// get from https://www.exchangerate-api.com/
+
+// current API_Key
+const API_KEY = 'fd0743007745ad1696bc8fde';
 
 const dropList = document.querySelectorAll('.drop-list select');
 const fromCurrency = document.querySelector('.from select');
@@ -51,7 +54,7 @@ amountInput.addEventListener('input', () => {
     }
     
     if (value.startsWith('0') && value.length > 1 && !value.startsWith('0.')) {
-        value = value.replace(/^0+/, '');  // Remove leading zeros unless it's '0.'
+        value = value.replace(/^0+/, '');
     }
     
     amountInput.value = value;
