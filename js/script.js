@@ -61,6 +61,17 @@ amountInput.addEventListener('input', () => {
     }
 });
 
+amountInput.addEventListener('focus', () => {
+    setTimeout(() => {
+        const rect = exchangeRateTxt.getBoundingClientRect();
+        const offset = rect.top + window.scrollY;
+        window.scrollTo({
+            top: offset,
+            behavior: 'smooth'
+        });
+    }, 300); 
+});
+
 function getExchangeRate() {
     let amountValue = parseFloat(amountInput.value);
     
