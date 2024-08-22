@@ -72,6 +72,13 @@ amountInput.addEventListener('focus', () => {
     }, 300); 
 });
 
+window.addEventListener('resize', () => {
+  const outputElement = document.querySelector('.exchange-rate');
+  const availableHeight = window.innerHeight;
+  // Calculate new margin or height based on availableHeight
+  outputElement.style.marginBottom = 'calculatedMargin';
+});
+
 function getExchangeRate() {
     let amountValue = parseFloat(amountInput.value);
     
