@@ -108,38 +108,3 @@ form .exchange-rate {
     font-size: 17px;
     margin: 20px 0 30px;
 }
-
-/* --------------------------------- */
-.wrapper {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Use min-height to ensure full height */
-    overflow-y: auto; /* Allow vertical scrolling */
-}
-
-.amount {
-    flex: 1 0 auto; /* Allow content to grow and shrink */
-}
-
-.wrapper {
-    display: flex;
-    flex-direction: column;
-    height: 100%; /* Full height of the parent container */
-    overflow: hidden; /* Hide overflow */
-}
-
-.amount {
-    flex: 1; /* Grow to fill remaining space */
-}
-
-.exchange-rate {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: #f1f1f1;
-    padding: 10px;
-    text-align: center;
-    border-top: 1px solid #ddd;
-    z-index: 1000; /* Ensure it’s above other content */
-}
