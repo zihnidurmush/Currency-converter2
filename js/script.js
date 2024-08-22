@@ -96,26 +96,3 @@ exchangeIcon.addEventListener('click', () => {
     loadFlag(toCurrency);
     getExchangeRate();
 });
-
-amountInput.addEventListener('focus', () => {
-    setTimeout(() => {
-        const rect = exchangeRateTxt.getBoundingClientRect();
-        const offset = rect.top + window.scrollY;
-        window.scrollTo({
-            top: offset - 20, // Adjust offset if necessary
-            behavior: 'smooth'
-        });
-    }, 300); // Adjust timeout if needed
-});
-
-// Adjust the view on resize events (e.g., when the keyboard opens/closes)
-window.addEventListener('resize', () => {
-    setTimeout(() => {
-        const rect = exchangeRateTxt.getBoundingClientRect();
-        const offset = rect.top + window.scrollY;
-        window.scrollTo({
-            top: offset - 20, // Adjust offset if necessary
-            behavior: 'smooth'
-        });
-    }, 300); // Adjust timeout if needed
-});
