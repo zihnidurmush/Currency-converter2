@@ -66,5 +66,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 For any inquiries or feedback, feel free to reach out at [zdurmush@gmail.com](mailto:zdurmush@gmail.com).
 
-Happy converting! 🌟
-```
+Happy currency converting! 🌟
