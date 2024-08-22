@@ -32,6 +32,7 @@ A sleek, real-time currency converter built using **HTML**, **CSS**, and **JavaS
 3. **Launch the App** 🖥️
 
    - Open `index.html` in your web browser and enjoy real-time currency conversions.
+   - https://zihnidurmush.github.io/currency-converter/
 
 ---
 
