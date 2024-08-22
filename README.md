@@ -38,8 +38,8 @@ A sleek, real-time currency converter built using **HTML**, **CSS**, and **JavaS
 
 ## 🎯 How to Use
 
-1. 💵 **Enter an Amount** you wish to convert.
-2. 🏳️ **Select Source and Target Currencies** using the dropdowns.
+1. 🏳️ **Select Source and Target Currencies** using the dropdowns.
+2. 💵 **Enter an Amount** you wish to convert.
 3. 📊 **View the Converted Value** displayed in real-time.
 
 🔄 Use the swap icon to quickly switch between the source and target currencies.
