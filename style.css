@@ -108,20 +108,3 @@ form .exchange-rate {
     font-size: 17px;
     margin: 20px 0 30px;
 }
-
-/* Add this to your CSS file */
-:root {
-    --vh: 1vh; /* Custom property for viewport height */
-}
-
-body {
-    height: calc(var(--vh, 1vh) * 100); /* Set body height using the custom property */
-}
-
-@media (orientation: portrait) {
-    /* Adjust height for portrait orientation if necessary */
-    :root {
-        --vh: 1vh;
-    }
-}
-
